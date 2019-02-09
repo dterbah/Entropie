@@ -53,7 +53,7 @@ class DataExtractor {
             var sourceStudient = data[studentKey];
             for(var subjectKey in sourceStudient) {
                 //subject context
-                var studentSubject = sourceStudient[subject];
+                var studentSubject = sourceStudient[subjectKey];
                 if(subjectKey === subject) {
                     for(var targetStudient in studentSubject) {
                         if(studentSubject[targetStudient] == student) {
