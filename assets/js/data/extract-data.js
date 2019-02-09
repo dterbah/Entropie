@@ -44,6 +44,7 @@ class DataExtractor {
         return students;
     }
 
+    //retrieve all of students who vote for the student in the subject
     static getTargetVotes(student, subject) {
         var targets = [];
 
