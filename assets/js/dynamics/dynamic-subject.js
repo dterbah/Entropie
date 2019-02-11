@@ -1,4 +1,6 @@
-const subjectClass = "w3-bar-item subject-selection";
+const activeSubject = "active-subject";
+const subjectSelection = "subject-selection";
+const subjectClass = "w3-bar-item " + subjectSelection;
 
 $(document).ready(function() {
     const subjects = DataExtractor.getSubjects();
@@ -9,5 +11,21 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-    
+    $('.' + subjectSelection).on('click', function() {
+        var li = $(this);
+        if(li.hasClass(activeSubject)) {
+            li.removeClass(activeSubject);
+        } else {
+            li.addClass(activeSubject);
+        }
+    });
 });
+
+function getActiveSubjects() {
+    var subjects = [];
+    $('.' + activeSubject).each(function(index) {
+        subjects.push($(this).text());
+    });
+
+    return subjects;
+}

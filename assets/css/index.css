@@ -1,10 +1,20 @@
-.students-container {
+.active-subject {
+    background: black;
 }
 
 .header-container {
     background: #AA3939;
     color: white;
 }
+
+.header-container li {
+    cursor: pointer;
+}
+
 .students-container {
     background: #A93939;
+}
+
+.student-element {
+    cursor: pointer;
 }
