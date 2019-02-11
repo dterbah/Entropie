@@ -27,7 +27,7 @@ $(document).ready(function() {
         else {
             const filteredStudents = students.beginWith(studentName);
             filteredStudents.forEach((student, index) => {
-                studentDiv.append('<div class="' + studentClass + '"><a href="" class="' + linkClass + '">' + student + '</a><br/></div>');             
+                studentDiv.append('<div class="' + studentClass + ' w3-row"><a href="" class="' + linkClass + '">' + student + '</a><br/></div>');             
             });
         }
     });
