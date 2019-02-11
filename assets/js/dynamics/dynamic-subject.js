@@ -2,9 +2,9 @@ const subjectClass = "w3-bar-item subject-selection";
 
 $(document).ready(function() {
     const subjects = DataExtractor.getSubjects();
-    var header = $('header');
+    var header = $('ul');
     subjects.forEach((subject, index) => {
-        header.append('<div class="' + subjectClass + '">' + subject + '</div>');
+        header.append('<li class="' + subjectClass + '">' + subject + '</li>');
     });
 });
 
