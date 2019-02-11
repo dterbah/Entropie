@@ -3,8 +3,8 @@ const linkClass = "w3-bar-item w3-border-bottom ";
 
 function initializeStudents() {
     //enter dynamicly the students
-    const students = DataExtractor.getStudents();
     var studentDiv = $('.students-container');
+    const students = DataExtractor.getStudents().beginWith(studentDiv.find('input').val());
 
     students.forEach((student, index) => {
         studentDiv.append('<div class="' + studentClass + '"><a href="" class="' + linkClass + '">' + student + '</a><br/></div>');
