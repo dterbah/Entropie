@@ -1,3 +1,11 @@
 .students-container {
     width: 15%;
 }
+
+.header-container {
+    background: #AA3939;
+    color: white;
+}
+.students-container {
+    background: #A93939;
+}
