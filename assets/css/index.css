@@ -1,10 +1,12 @@
 .active-subject {
-    background: black;
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .header-container {
     background: #AA3939;
     color: white;
+    padding: 10px;
 }
 
 .header-container li {
@@ -12,9 +14,15 @@
 }
 
 .students-container {
-    background: #A93939;
+    background: #D87878;
 }
 
 .student-element {
     cursor: pointer;
+    margin: 15px;
+    font-weight: bolder;
+    text-align: center;
+    text-decoration: none;
+    background: #D87878;
+    color: white;
 }
