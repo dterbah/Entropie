@@ -13,29 +13,91 @@ class DataExtractor {
         return subjects;
     }
 
+    // old version
+    // static getVotesBySubject(subject) {
+    //     var count = 0;
+
+    //     for(var studentKey in data) {
+    //         //student context
+    //         var student = data[studentKey];
+    //         for(var subjectKey in student) {
+    //             //subject context
+    //             if(subjectKey === subject) {
+    //                 currentSubject = student[subjectKey];
+    //                 count += currentSubject.length;
+    //             }
+    //         }
+    //     }
+
+    //     return count;
+    // }
+
+
+    //example of result
+    // {
+    //    'abreudia': ['vaurie', 'baaziz', ...],
+    //     ...
+    //}
+
     static getVotesBySubject(subject) {
-        var count = 0;
+        var result = {};
 
         for(var studentKey in data) {
-            //student context
-            var student = data[studentKey];
-            for(var subjectKey in student) {
-                //subject context
-                if(subjectKey === subject) {
-                    currentSubject = student[subjectKey];
-                    count += currentSubject.length;
+            var allVotes = data[studentKey];
+
+            //context of student -> all votes of this student
+            for(var subjectKey in allVotes) {
+                if((subjectKey == subject) && (allVotes[subjectKey].length)) {
+                    result[studentKey] = allVotes[subjectKey];
+                    break; //ugly
                 }
+            }
+        }
+
+        return result;
+    }
+
+    static getVotesBySubjects(subjects) {
+        var result = {};
+        var map;
+
+        for(var studentKey in data) {
+            var allVotes = data[studentKey];
+
+            //context of student -> all votes of this student 
+            map = {};
+            for(var subjectKey in allVotes) {
+                if(subjects.includes(subjectKey) && (allVotes[subjectKey].length)) {
+                    map[subjectKey] = allVotes[subjectKey];                     
+                }
+            }
+                            //add the result for each student who have voted
+            if(!jQuery.isEmptyObject(map)) {
+                result[studentKey] = map;
+            }
+        }
+
+        return result;
+    }
+
+    //get the number of votes for a student for a subject
+    static getCountByStudentAndSubject(student, subject) {
+        //retrieve all of the votes for the subject
+        var allVotes = DataExtractor.getVotesBySubject(subject);
+
+        var count = 0;
+
+        for(var studentKey in allVotes) {
+            var votes = allVotes[studentKey];
+            if(votes.includes(student)) {
+                count++;
             }
         }
 
         return count;
     }
 
-    
 
-    static getVotesByStudent(student) {
-        
-    }
 
     static getStudents() {
         var students = []
@@ -46,27 +108,22 @@ class DataExtractor {
         return students;
     }
 
-    //retrieve all of students who vote for the student in the subject
-    static getTargetVotes(student, subject) {
-        var targets = [];
+    static getTargetStudentsBySubject(subject) {
+        var targetStudents = [];
 
-        for(var studentKey in data) {
-            //stduent context
-            var sourceStudient = data[studentKey];
-            for(var subjectKey in sourceStudient) {
-                //subject context
-                var studentSubject = sourceStudient[subjectKey];
-                if(subjectKey === subject) {
-                    for(var targetStudient in studentSubject) {
-                        if(studentSubject[targetStudient] == student) {
-                            targets.push(studentKey);
-                        }
-                    }
+        var allVotes = DataExtractor.getVotesBySubject(subject);
+
+        for(var studentKey in allVotes) {
+            var votes = allVotes[studentKey];
+
+            votes.forEach( ( student, index ) => {
+                if(!targetStudents.includes(student)) {
+                    targetStudents.push(student);
                 }
-            }
+            });
         }
 
-        return targets;
+        return targetStudents;
     }
 
     static getAllTargetVotes(subject) {
