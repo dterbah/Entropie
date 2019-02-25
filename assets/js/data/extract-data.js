@@ -31,6 +31,8 @@ class DataExtractor {
         return count;
     }
 
+    
+
     static getVotesByStudent(student) {
         
     }
