@@ -3,3 +3,5 @@ Un vote pertinent est un vote qui est coherent par rapport au reste de la promo,
 
 Couleur pour chaque personne ?
 Selection de la matiere et de la personne avec expression reguliere
+
+Quand on va selectionner une personne (A) et une/des matiere(s), on veut savoir les votes de A pour la/les matiere(s) 
