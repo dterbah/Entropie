@@ -97,8 +97,6 @@ class DataExtractor {
         return count;
     }
 
-
-
     static getStudents() {
         var students = []
         for(var key in data) {
@@ -138,5 +136,19 @@ class DataExtractor {
 
     static getSourceVotes(student) {
 
+    }
+
+    static getCountForStudentBySubject(subject) {
+        var result = {};
+        var targetStudents = DataExtractor.getTargetStudentsBySubject(subject);
+
+        targetStudents.forEach( (student, index) => {
+            let count = DataExtractor.getCountByStudentAndSubject(student, subject);
+            result[student] = count;
+        });
+
+        
+
+        return result;
     }
 }

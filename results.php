@@ -3,25 +3,33 @@
         <title>Entropie</title>
             <meta charset="UTF-8">
             <script src="http://www.iut-fbleau.fr/projet/maths/?f=pagerank.js"></script>
+
+            <script src="./assets/js/lib/d3.js"></script>                   
             <script src="./assets/js/data/array-extensions.js"></script>
             <script src="./assets/js/data/extract-data.js"></script>
             <script src="./assets/js/lib/jquery.js"></script>
-            <script src="./assets/js/dynamics/redirection.js"></script>            
+            <script src="./assets/js/dynamics/redirection.js"></script>     
+            <script src="./assets/js/graphs/votes-graph.js"></script>                   
 
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <link rel="stylesheet" href="./assets/css/index.css">
     </head>
     <body>
-        <header class="w3-container header-container">
+
+        <!--<header class="w3-container header-container">
             <div class="w3-container w3-bar subjects-container">
                 <ul>
                 </ul>
             </div>
         </header> 
-
+-->
         <script>
-            console.log(Redirection.urlToData());
+            
         </script>
+
+        <div id="chart">
+
+        </div>
         <!--<div class="w3-sidebar w3-red students-container">
             <div class="w3-row w3-section">
                 <div class="w3-rest">
