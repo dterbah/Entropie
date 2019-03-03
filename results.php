@@ -4,7 +4,7 @@
             <meta charset="UTF-8">
             <script src="http://www.iut-fbleau.fr/projet/maths/?f=pagerank.js"></script>
 
-            <script src="./assets/js/lib/d3.js"></script>                   
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>                   
             <script src="./assets/js/data/array-extensions.js"></script>
             <script src="./assets/js/data/extract-data.js"></script>
             <script src="./assets/js/lib/jquery.js"></script>
@@ -15,7 +15,6 @@
             <link rel="stylesheet" href="./assets/css/index.css">
     </head>
     <body>
-
         <!--<header class="w3-container header-container">
             <div class="w3-container w3-bar subjects-container">
                 <ul>
@@ -23,12 +22,13 @@
             </div>
         </header> 
 -->
-        <script>
-            
-        </script>
-
-        <div id="chart">
-
+        <style type="text/css">
+            #chart {
+                overflow: auto;
+            }
+        </style>
+        <div class="chart-div">
+            <canvas id="chart" width="5000" height="750"></canvas>
         </div>
         <!--<div class="w3-sidebar w3-red students-container">
             <div class="w3-row w3-section">
