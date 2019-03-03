@@ -1,20 +1,37 @@
 .active-subject {
-    text-decoration: underline;
-    font-weight: bold;
+    transition: 1s;
+    background: #7788AA;
+    border-radius: 50px;
 }
 
 .header-container {
-    background: #AA3939;
+    background: #2E4372;
     color: white;
-    padding: 10px;
 }
 
-.header-container li {
+.subject-selection {
+    padding: 10px;
+    margin: 10px;
     cursor: pointer;
+    transition: 1s;
+}
+.subject-all {
+    background: #D6DCE8;
+    color: black;
+    border-radius: 50px;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+.subject-container ul {
+    height: auto;
+}
+h2 {
+    font-weight: bold;
 }
 
 .students-container {
-    background: #D87878;
+    background: #4E648E;
 }
 
 .student-element {
@@ -23,6 +40,6 @@
     font-weight: bolder;
     text-align: center;
     text-decoration: none;
-    background: #D87878;
+    background: #4E648E;
     color: white;
 }
