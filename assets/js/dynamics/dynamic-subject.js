@@ -21,6 +21,24 @@ $(document).ready(function() {
     });
 });
 
+var subjectAll = false;
+
+$(document).ready(function() {
+    
+    $('.subject-all').on('click', function() {
+        $('.subject-selection').each(function(index){
+            var li = $(this);
+            if(!subjectAll) {
+                li.addClass(activeSubject);
+            } else {
+                li.removeClass(activeSubject);
+            }
+        });
+        subjectAll = !subjectAll;
+    });
+
+});
+
 function getActiveSubjects() {
     var subjects = [];
     $('.' + activeSubject).each(function(index) {
