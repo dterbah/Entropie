@@ -14,7 +14,16 @@
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <link rel="stylesheet" href="./assets/css/index.css">
     </head>
+
     <body>
+        <header class="w3-container header-container">
+            <h2>Mathématiques: Entropie</h1>
+            <div class="w3-container w3-bar subjects-container">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                </ul>
+            </div>
+        </header>
         <!--<header class="w3-container header-container">
             <div class="w3-container w3-bar subjects-container">
                 <ul>
@@ -28,11 +37,11 @@
             }
         </style>
         <div class="chart-div">
-            <canvas id="global-chart" width="5000" height="750"></canvas>
+            <canvas id="global-chart" width="3000" height="750"></canvas>
         </div>
 
         <div>
-            <canvas id="individual-chart" width="5000" height="750"></canvas>
+            <canvas id="individual-chart" width="3000" height="750"></canvas>
         </div>
 
         <!--<div class="w3-sidebar w3-red students-container">
