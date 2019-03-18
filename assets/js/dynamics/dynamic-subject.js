@@ -24,7 +24,6 @@ $(document).ready(function() {
 var subjectAll = false;
 
 $(document).ready(function() {
-    
     $('.subject-all').on('click', function() {
         $('.subject-selection').each(function(index){
             var li = $(this);

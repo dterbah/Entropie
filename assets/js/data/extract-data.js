@@ -1,4 +1,5 @@
 const data = votes;
+const JSON_STUDENTS_URL = "./assets/js/data/students.json";
 
 class DataExtractor {
 
@@ -97,6 +98,23 @@ class DataExtractor {
         return count;
     }
 
+    static getVotesByStudentAndSubject(student, subject) {
+        const map = {};
+
+        const concernedData = data[student];
+
+        for(const subjectKey in concernedData) {
+            if(subjectKey == subject) {
+                const votes = concernedData[subjectKey];
+                votes.forEach( (value, index) => {
+                    map[value] = 1; // default value
+                });
+
+                return map;
+            }
+        }
+    }
+
     static getStudents() {
         var students = []
         for(var key in data) {
@@ -104,6 +122,11 @@ class DataExtractor {
         }
 
         return students;
+    }
+
+    static getStudentsByJSON() {
+        $.getJSON(JSON_STUDENTS_URL, (json) => {
+        });
     }
 
     static getTargetStudentsBySubject(subject) {
@@ -150,5 +173,33 @@ class DataExtractor {
         
 
         return result;
+    }
+
+    static sortedData(data) {
+        const maxCount = Object.keys(data).length;
+        const sortedMap = {};
+
+        var currentMax = 0, currentStudentKey;
+
+        for(let count = 0; count < maxCount; count++) {
+            //retrieve the max at each loop
+            
+            // default values
+            currentMax = 0;
+            currentStudentKey = "";
+
+            for(const student in data) {
+                const studentCount = data[student];
+                if(studentCount > currentMax) {
+                    currentMax = studentCount;
+                    currentStudentKey = student;
+                }
+            }
+
+            sortedMap[currentStudentKey] = currentMax;
+            delete data[currentStudentKey];
+        }
+
+        return sortedMap;
     }
 }

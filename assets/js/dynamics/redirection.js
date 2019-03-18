@@ -41,7 +41,6 @@ class Redirection {
             let key = urlParam[0], value = urlParam[1];
 
             result[key] = value;
-
         }
 
         //split the subjects

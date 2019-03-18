@@ -28,8 +28,13 @@
             }
         </style>
         <div class="chart-div">
-            <canvas id="chart" width="5000" height="750"></canvas>
+            <canvas id="global-chart" width="5000" height="750"></canvas>
         </div>
+
+        <div>
+            <canvas id="individual-chart" width="5000" height="750"></canvas>
+        </div>
+
         <!--<div class="w3-sidebar w3-red students-container">
             <div class="w3-row w3-section">
                 <div class="w3-rest">
