@@ -100,4 +100,7 @@ $(document).ready( () => {
 			}
 		}
 	});	
+
+	const sourceStudents = DataExtractor.getStudents();
+	generateEntropy(subject, sourceStudents, labels);
 });

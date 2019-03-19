@@ -8,6 +8,7 @@
             <script src="./assets/js/data/array-extensions.js"></script>
             <script src="./assets/js/data/extract-data.js"></script>
             <script src="./assets/js/lib/jquery.js"></script>
+            <script type="text/javascript" src="./assets/js/maths/maths.js"></script>
             <script src="./assets/js/dynamics/redirection.js"></script>     
             <script src="./assets/js/graphs/votes-graph.js"></script>                   
 
