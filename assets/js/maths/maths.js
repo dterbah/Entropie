@@ -1,7 +1,3 @@
-function generalEntropy(name) {
-
-}
-
 generateEntropy = (subject, sourceStudents, targetStudents) => {
     const result = [];
 
@@ -14,13 +10,19 @@ generateEntropy = (subject, sourceStudents, targetStudents) => {
             if(!keys.includes(targetStudent)) votesForSourceStudent.push(0);
             else votesForSourceStudent.push(votes[targetStudent]);
         });      
-
-        normalizeVector(votesForSourceStudent);
-
-        console.log(sourceStudent, votesForSourceStudent);
-
         result.push(votesForSourceStudent);
     });
+
+    const sumResult = new Array(result[0].length);
+    sumResult.fill(0);
+    result.forEach( (student, index) => {
+        student.forEach( (vote, index) => {
+            sumResult[index] += vote;
+        });
+    });
+    normalizeVector(sumResult);
+
+    
 
     return result;
 }
@@ -36,16 +38,17 @@ klDivergence = (p1, p2) => {
     return klDiv;
 }
 
-function normalizeVector(vector) {
-    var sum = 0.0;
+normalizeVector = (vector) => {
+    var max = 1.0;
     vector.forEach( (value, index) => {
-        sum += value;
+        max = (value > max) ? value : max;
     });
-
-    vector.map(x => x / sum);
+    vector.forEach( (x, index) => {
+        vector[index] = x / max;
+    });
 }
 
-function addVector(vector1, vector2) {
+addVector = (vector1, vector2) => {
     var vector3 = vector1.slice(0);
     vector1.forEach( (value, index) => {
         vector3[index] = vector1[index] + vector2[index];
