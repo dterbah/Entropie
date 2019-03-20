@@ -101,6 +101,6 @@ $(document).ready( () => {
 		}
 	});	
 
-	const sourceStudents = DataExtractor.getStudents();
-	generateEntropy(subject, sourceStudents, labels);
+	const sourceStudents = Object.keys(DataExtractor.getVotesBySubject(subject));
+	console.log(generateEntropy(subject, sourceStudents, labels));
 });
