@@ -1,17 +1,23 @@
-generateEntropy = (subject) => {
-    const result = getVotesMatrix(subject);
+generateEntropy = (subject, student) => {
+    const matrix = getVotesMatrix(subject);
 
-    const sumResult = new Array(result[0].length);
-    sumResult.fill(0);
-    result.forEach( (student, index) => {
+    const globalRow = new Array(matrix[0].length);
+    globalRow.fill(0);
+    matrix.forEach( (student, index) => {
         student.forEach( (vote, index) => {
-            sumResult[index] += vote;
+            globalRow[index] += vote;
         });
     });
     
-    normalizeVector(sumResult);
+    normalizeVector(globalRow);
 
-    return result;
+    const voteRow = getVoteRow(subject, student);
+
+    normalizeVector(voteRow);
+
+    const divergence = klDivergence(voteRow, globalRow);
+
+    return divergence;
 }
 
 getVotesMatrix = (subject) => {
@@ -59,7 +65,7 @@ klDivergence = (p1, p2) => {
     for(let i = 0; i < p1.length; i++) {
         if(p1[i] == 0.0 || p2[i] == 0.0) continue;
 
-        klDiv += p[i] * Math.log(p1[i] / p2[i]);
+        klDiv += p1[i] * Math.log(p1[i] / p2[i]);
     }
 
     return klDiv;
@@ -73,12 +79,4 @@ normalizeVector = (vector) => {
     vector.forEach( (x, index) => {
         vector[index] = x / max;
     });
-}
-
-addVector = (vector1, vector2) => {
-    var vector3 = vector1.slice(0);
-    vector1.forEach( (value, index) => {
-        vector3[index] = vector1[index] + vector2[index];
-    });
-    return vector3;
 }
