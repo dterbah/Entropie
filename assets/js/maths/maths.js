@@ -17,12 +17,19 @@ generateEntropy = (subject, sourceStudents, targetStudents) => {
 
         normalizeVector(votesForSourceStudent);
 
-        console.log(sourceStudent, votesForSourceStudent);
-
         result.push(votesForSourceStudent);
     });
 
     return result;
+}
+
+getVotesMatrix = (subject) => {
+    const data = DataExtractor.getCountForStudentBySubject(subject);
+    const sortedMap = DataExtractor.sortedData(data);
+
+    // normalize 
+    var max = 0;
+    
 }
 
 klDivergence = (p1, p2) => {

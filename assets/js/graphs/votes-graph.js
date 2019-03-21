@@ -9,11 +9,7 @@ $(document).ready( () => {
 
 	// retrieve labels and datasets
 	const labels = Object.keys(sortedMap);
-	const datasets = [];
-
-	labels.forEach( (label, index) => {
-		datasets.push(sortedMap[label]);
-	});
+	const datasets = Object.values(sortedMap);
 
 	//find the max of the value
 	var max = 0;
@@ -25,8 +21,6 @@ $(document).ready( () => {
 	for(let i = 0; i < datasets.length; i++) {
 		datasets[i] /= max;
 	}
-
-
 
 	const globalChartContext = document.getElementById('global-chart').getContext('2d');
 
@@ -62,16 +56,9 @@ $(document).ready( () => {
 	const studentMap = DataExtractor.getVotesByStudentAndSubject(student, subject);
 	const studentKeys = Object.keys(studentMap); 
 
-	datasets.forEach( (dataset, index) => {
-		if(!studentKeys.includes(dataset)) {
-			studentMap[dataset] = 0; // null value
-		}
-	});
+	console.log(studentMap);
 
-	const studentData = [];
-	labels.forEach( (value, index) => {
-		studentData.push(studentMap[value]);
-	});
+	const studentData = Object.values(studentMap);
 
 	const individualChartContext = document.getElementById('individual-chart').getContext('2d');
 	const individualChart = new Chart(individualChartContext, {
@@ -102,5 +89,4 @@ $(document).ready( () => {
 	});	
 
 	const sourceStudents = Object.keys(DataExtractor.getVotesBySubject(subject));
-	console.log(generateEntropy(subject, sourceStudents, labels));
 });
