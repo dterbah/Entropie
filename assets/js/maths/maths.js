@@ -1,9 +1,25 @@
-function generalEntropy(name) {
+generateEntropy = (subject) => {
+    const result = getVotesMatrix(subject);
 
+    const sumResult = new Array(result[0].length);
+    sumResult.fill(0);
+    result.forEach( (student, index) => {
+        student.forEach( (vote, index) => {
+            sumResult[index] += vote;
+        });
+    });
+    
+    normalizeVector(sumResult);
+
+    return result;
 }
 
-generateEntropy = (subject, sourceStudents, targetStudents) => {
+getVotesMatrix = (subject) => {
     const result = [];
+
+    // retrieve the sources / target students
+    const sourceStudents = Object.keys(DataExtractor.getVotesBySubject(subject));
+    const targetStudents = Object.keys(DataExtractor.getCountForStudentBySubject(subject));
 
     sourceStudents.forEach( (sourceStudent, index) => {
         const votesForSourceStudent = [];
@@ -14,7 +30,6 @@ generateEntropy = (subject, sourceStudents, targetStudents) => {
             if(!keys.includes(targetStudent)) votesForSourceStudent.push(0);
             else votesForSourceStudent.push(votes[targetStudent]);
         });      
-
         normalizeVector(votesForSourceStudent);
 
         result.push(votesForSourceStudent);
@@ -23,13 +38,20 @@ generateEntropy = (subject, sourceStudents, targetStudents) => {
     return result;
 }
 
-getVotesMatrix = (subject) => {
-    const data = DataExtractor.getCountForStudentBySubject(subject);
-    const sortedMap = DataExtractor.sortedData(data);
+getVoteRow = (subject, student) => {
+    const result = [];
 
-    // normalize 
-    var max = 0;
-    
+    const studentMap = DataExtractor.getVotesByStudentAndSubject(student, subject);
+    const keys = Object.keys(studentMap);
+
+    const targetStudents = Object.keys(DataExtractor.getCountForStudentBySubject(subject));
+
+    targetStudents.forEach( (targetStudent, index) => {
+        if(!keys.includes(targetStudent)) result.push(0); // default value
+        else result.push(studentMap[targetStudent]);
+    });
+
+    return result;
 }
 
 klDivergence = (p1, p2) => {
@@ -43,16 +65,17 @@ klDivergence = (p1, p2) => {
     return klDiv;
 }
 
-function normalizeVector(vector) {
-    var sum = 0.0;
+normalizeVector = (vector) => {
+    var max = 1.0;
     vector.forEach( (value, index) => {
-        sum += value;
+        max = (value > max) ? value : max;
     });
-
-    vector.map(x => x / sum);
+    vector.forEach( (x, index) => {
+        vector[index] = x / max;
+    });
 }
 
-function addVector(vector1, vector2) {
+addVector = (vector1, vector2) => {
     var vector3 = vector1.slice(0);
     vector1.forEach( (value, index) => {
         vector3[index] = vector1[index] + vector2[index];

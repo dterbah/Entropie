@@ -56,8 +56,6 @@ $(document).ready( () => {
 	const studentMap = DataExtractor.getVotesByStudentAndSubject(student, subject);
 	const studentKeys = Object.keys(studentMap); 
 
-	console.log(studentMap);
-
 	const studentData = Object.values(studentMap);
 
 	const individualChartContext = document.getElementById('individual-chart').getContext('2d');
@@ -88,5 +86,7 @@ $(document).ready( () => {
 		}
 	});	
 
-	const sourceStudents = Object.keys(DataExtractor.getVotesBySubject(subject));
+	// temporary
+	//console.log(generateEntropy(subject))
+	//console.log(getVoteRow(subject, student));
 });
