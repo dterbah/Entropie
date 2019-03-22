@@ -48,7 +48,7 @@ getVoteRow = (subject, student) => {
 
     targetStudents.forEach( (targetStudent, index) => {
         if(!keys.includes(targetStudent)) result.push(0); // default value
-        else result.push(studentMap[targetStudent]);
+        else result.push(studentMap[targetStudent]); 
     });
 
     return result;
