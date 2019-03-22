@@ -87,6 +87,6 @@ $(document).ready( () => {
 	});	
 
 	// temporary
-	//console.log(generateEntropy(subject))
+	console.log(generateEntropy(subject, student));
 	//console.log(getVoteRow(subject, student));
 });
