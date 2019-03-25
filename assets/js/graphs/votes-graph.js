@@ -1,90 +1,103 @@
-$(document).ready( () => {
-	const urlData = Redirection.urlToData()
-	const student = urlData[STUDENT_URL_TAG];
-	const subject = urlData[SUBJECTS_URL_TAG];
+const GRAPH_DIV_CLASS = "graph-div-class";
+const GRAPH_CONTAINER_CLASS = ".graph-container";
+const EMPTY_GRAPH_DIV = "<div class='" + GRAPH_DIV_CLASS + "'></div>";
 
-	const data = DataExtractor.getCountForStudentBySubject(subject);
+displayGraph = (student, subjects) => {
+	const ASIDE_WIDTH = $('.students-container').width();
+	$(GRAPH_CONTAINER_CLASS).empty();
+	subjects.forEach( (subject, index) => {
+		const div = $(GRAPH_CONTAINER_CLASS).append(EMPTY_GRAPH_DIV);
+				
+		const globalCanvas = $('<canvas/>').css({ width: 3000, height: 750, 'margin-left': ASIDE_WIDTH + 'px' }).attr('id', 'global-chart' + index);
 
-	const sortedMap = DataExtractor.sortedData(data);
+		const individualCanvas = $('<canvas/>').css( { width: 3000, height: 750, 'margin-left': ASIDE_WIDTH + 'px' } ).attr('id', 'individual-chart' + index);
 
-	// retrieve labels and datasets
-	const labels = Object.keys(sortedMap);
-	const datasets = Object.values(sortedMap);
+		div.append(globalCanvas);
+		div.append(individualCanvas);
 
-	//find the max of the value
-	var max = 0;
-	datasets.forEach( (dataset, index) => {
-		if(max < dataset) max = dataset;
-	});
+		const data = DataExtractor.getCountForStudentBySubject(subject);	
 
-	// map doesn't work...
-	for(let i = 0; i < datasets.length; i++) {
-		datasets[i] /= max;
-	}
+		const sortedMap = DataExtractor.sortedData(data);
 
-	const globalChartContext = document.getElementById('global-chart').getContext('2d');
+		// retrieve labels and datasets
+		const labels = Object.keys(sortedMap);
+		const datasets = Object.values(sortedMap);
 
-	const globalChart = new Chart(globalChartContext, {
-		type: 'bar',
-		data: {
-			labels: labels,
-			datasets: [{
-				label: '# of global votes',
-				data: datasets,
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)'
-				],
-				borderColor: [
-					'rgba(255,99,132,1)'
-				],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				yaxes: [{
-					ticks: {
-						beginAtZero: true
-					}
-				}]
-			}
+		//find the max of the value
+		var max = 0;
+		datasets.forEach( (dataset, index) => {
+			if(max < dataset) max = dataset;
+		});
+
+		// map doesn't work...
+		for(let i = 0; i < datasets.length; i++) {
+			datasets[i] /= max;
 		}
-	});
 
+		const globalChartContext = document.getElementById('global-chart' + index).getContext('2d');
 
-	// individual graph
-	const studentRow = getVoteRow(subject, student);
-	
-	const individualChartContext = document.getElementById('individual-chart').getContext('2d');
-
-	const individualChart = new Chart(individualChartContext, {
-		type: 'bar',
-		data: {
-			labels: labels,
-			datasets: [{
-				label: '# of individual votes',
-				data: studentRow,
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)'
-				],
-				borderColor: [
-					'rgba(255,  99, 132, 1)'
-				],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				yaxes: [{
-					ticks: {
-						beginAtZero: true
-					}
+		const globalChart = new Chart(globalChartContext, {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: '# votes globaux de la matière ' + subject,
+					data: datasets,
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)'
+					],
+					borderColor: [
+						'rgba(255,99,132,1)'
+					],
+					borderWidth: 1
 				}]
+			},
+			options: {
+				scales: {
+					yaxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
 			}
-		}
-	});	
+		});
+
+
+		// individual graph
+		const studentRow = getVoteRow(subject, student);
+		
+		const individualChartContext = document.getElementById('individual-chart' + index).getContext('2d');
+
+		const individualChart = new Chart(individualChartContext, {
+			type: 'bar',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: '# des votes individuels de la matière ' + subject + ' de ' + student,
+					data: studentRow,
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)'
+					],
+					borderColor: [
+						'rgba(255,  99, 132, 1)'
+					],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					yaxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		});	
+	});
 
 	// temporary
 	//console.log(generateEntropy(subject, student));
 	//console.log(getVoteRow(subject, student));
-});
+}

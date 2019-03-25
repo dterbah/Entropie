@@ -8,7 +8,7 @@ $(document).ready(function() {
 
         const student = $(this).text();
 
-        Redirection.redirect(RESULT_URL, student, activeSubjects);
+        displayGraph(student, activeSubjects);
     }); 
 }); 
 

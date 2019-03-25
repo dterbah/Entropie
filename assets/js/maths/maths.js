@@ -25,7 +25,10 @@ getVotesMatrix = (subject) => {
 
     // retrieve the sources / target students
     const sourceStudents = Object.keys(DataExtractor.getVotesBySubject(subject));
-    const targetStudents = Object.keys(DataExtractor.getCountForStudentBySubject(subject));
+    const targetStudents = Object.keys(
+        DataExtractor.sortedData(
+        DataExtractor.getCountForStudentBySubject(subject))
+    );
 
     sourceStudents.forEach( (sourceStudent, index) => {
         const votesForSourceStudent = [];
@@ -36,6 +39,7 @@ getVotesMatrix = (subject) => {
             if(!keys.includes(targetStudent)) votesForSourceStudent.push(0);
             else votesForSourceStudent.push(votes[targetStudent]);
         });      
+        
         normalizeVector(votesForSourceStudent);
 
         result.push(votesForSourceStudent);

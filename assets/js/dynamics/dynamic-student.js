@@ -6,12 +6,11 @@ function initializeStudents() {
     $('input').val(''); // set empty the inut search
     
     var studentDiv = $('.students-container');
-    const students = DataExtractor.getStudents().beginWith(studentDiv.find('input').val());
+    const students = DataExtractor.getStudents()//.beginWith(studentDiv.find('input').val());
 
     students.forEach((student, index) => {
         studentDiv.append('<div class="' + studentClass + '"><span class="' + linkClass + '">' + student + '</span><br/></div>');
     });
-
 }
 
 $(document).ready(function() {

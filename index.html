@@ -12,10 +12,21 @@
             <script src="./assets/js/dynamics/dynamic-subject.js"></script>
             <script src="./assets/js/dynamics/dynamic-subject-all.js"></script>
             <script src="./assets/js/dynamics/redirect.js"></script>
+            <script type="text/javascript" src="./assets/js/maths/maths.js"></script>
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+            <script src="./assets/js/graphs/votes-graph.js"></script>            
 
             <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
             <link rel="stylesheet" href="./assets/css/index.css">
     </head>
+
+    <style>
+        .graph-container {
+            overflow-x: scroll;
+            display: block;
+        }
+    </style>
     <body>
         <header class="w3-container header-container">
             <h2>Mathématiques: Entropie</h1>
@@ -25,10 +36,6 @@
                 </ul>
             </div>
         </header>
-
-        <script type="text/javascript">
-            console.log(DataExtractor.getCountForStudentBySubject("EGOD"));
-        </script>
 
         <div class="w3-sidebar students-container">
             <div class="w3-row w3-section">
@@ -45,6 +52,10 @@
                         <p>Vous devez sélectionné au moins une matière pour voir les résultats d'un élève.</p>
                 </div>
             </div>
+        </div>
+
+        <div class="graph-container">
+
         </div>
 
     </body>
