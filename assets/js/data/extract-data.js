@@ -14,26 +14,6 @@ class DataExtractor {
         return subjects;
     }
 
-    // old version
-    // static getVotesBySubject(subject) {
-    //     var count = 0;
-
-    //     for(var studentKey in data) {
-    //         //student context
-    //         var student = data[studentKey];
-    //         for(var subjectKey in student) {
-    //             //subject context
-    //             if(subjectKey === subject) {
-    //                 currentSubject = student[subjectKey];
-    //                 count += currentSubject.length;
-    //             }
-    //         }
-    //     }
-
-    //     return count;
-    // }
-
-
     //example of result
     // {
     //    'abreudia': ['vaurie', 'baaziz', ...],

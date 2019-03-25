@@ -53,19 +53,17 @@ $(document).ready( () => {
 
 
 	// individual graph
-	const studentMap = DataExtractor.getVotesByStudentAndSubject(student, subject);
-	const studentKeys = Object.keys(studentMap); 
-
-	const studentData = Object.values(studentMap);
-
+	const studentRow = getVoteRow(subject, student);
+	
 	const individualChartContext = document.getElementById('individual-chart').getContext('2d');
+
 	const individualChart = new Chart(individualChartContext, {
 		type: 'bar',
 		data: {
 			labels: labels,
 			datasets: [{
 				label: '# of individual votes',
-				data: studentData,
+				data: studentRow,
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)'
 				],
@@ -87,6 +85,6 @@ $(document).ready( () => {
 	});	
 
 	// temporary
-	console.log(generateEntropy(subject, student));
+	//console.log(generateEntropy(subject, student));
 	//console.log(getVoteRow(subject, student));
 });

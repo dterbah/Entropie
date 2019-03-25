@@ -47,14 +47,19 @@ getVotesMatrix = (subject) => {
 getVoteRow = (subject, student) => {
     const result = [];
 
-    const studentMap = DataExtractor.getVotesByStudentAndSubject(student, subject);
-    const keys = Object.keys(studentMap);
+    const data = DataExtractor.getCountForStudentBySubject(subject);
+    const sortedData = DataExtractor.sortedData(data);
+    const targetStudents = Object.keys(sortedData);
 
-    const targetStudents = Object.keys(DataExtractor.getCountForStudentBySubject(subject));
+    const studentMap = DataExtractor.getVotesByStudentAndSubject(student, subject);
+
+    const keys = Object.keys(studentMap);
 
     targetStudents.forEach( (targetStudent, index) => {
         if(!keys.includes(targetStudent)) result.push(0); // default value
-        else result.push(studentMap[targetStudent]); 
+        else {
+            result.push(studentMap[targetStudent]);
+        } 
     });
 
     return result;
