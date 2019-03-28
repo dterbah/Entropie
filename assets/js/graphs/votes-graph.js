@@ -17,7 +17,7 @@ displayGraph = (student, subjects) => {
 				
 		const globalCanvas = $('<canvas/>').css({ width: 3000, height: 750, 'margin-left': ASIDE_WIDTH + 'px' }).attr('id', 'global-chart' + index);
 
-		const individualCanvas = $('<canvas/>').css( { width: 3000, height: 750, 'margin-left': ASIDE_WIDTH + 'px' } ).attr('id', 'individual-chart' + index);
+		const individualCanvas = $('<canvas/>').css( { width: 3000, height: 300, 'margin-left': ASIDE_WIDTH + 'px' } ).attr('id', 'individual-chart' + index);
 
 		div.append(globalCanvas);
 		div.append(individualCanvas);
@@ -84,7 +84,7 @@ displayGraph = (student, subjects) => {
 					label: '# des votes individuels de la matière ' + subject + ' de ' + student,
 					data: studentRow,
 					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)'
+						'rgba(255, 0, 0, 0.2)'
 					],
 					borderColor: [
 						'rgba(255,  99, 132, 1)'
@@ -113,7 +113,10 @@ displayGraph = (student, subjects) => {
     entropyBar.css({
         display: 'block',
         width: entropyPercentage + "%",
-        'margin-left': ASIDE_WIDTH + 'px'
+		marginLeft: ASIDE_WIDTH + 'px',
+		'position': 'relative',
+		'left':'100px',
+		'bottom':'85px'
     }).text('Entropie générale = ' + entropyPercentage + "%");
 
 
