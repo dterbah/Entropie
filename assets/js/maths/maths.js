@@ -15,9 +15,12 @@ generateEntropy = (subject, student) => {
 
     normalizeVector(voteRow);
 
-    const divergence = klDivergence(voteRow, globalRow);
-
-    return divergence;
+    const maxValue = maxVectorValue(voteRow);
+    if(maxValue == 0.0) {
+        return 0.0;
+    } else {
+        return klDivergence(voteRow, globalRow);
+    }
 }
 
 getVotesMatrix = (subject) => {
@@ -25,21 +28,8 @@ getVotesMatrix = (subject) => {
 
     // retrieve the sources / target students
     const sourceStudents = Object.keys(DataExtractor.getVotesBySubject(subject));
-    // const targetStudents = Object.keys(
-    //     DataExtractor.sortedData(
-    //     DataExtractor.getCountForStudentBySubject(subject))
-    // );
 
     sourceStudents.forEach( (sourceStudent, index) => {
-        // const votesForSourceStudent = [];
-        // const votes = DataExtractor.getVotesByStudentAndSubject(sourceStudent, subject);
-        // const keys = Object.keys(votes);
-
-        // targetStudents.forEach( (targetStudent, index) => {
-        //     if(!keys.includes(targetStudent)) votesForSourceStudent.push(0);
-        //     else votesForSourceStudent.push(votes[targetStudent]);
-        // });
-
         const votesForSourceStudent = getVoteRow(subject, sourceStudent);
 
         normalizeVector(votesForSourceStudent);
@@ -91,4 +81,12 @@ normalizeVector = (vector) => {
     vector.forEach( (x, index) => {
         vector[index] = x / max;
     });
+}
+
+maxVectorValue = (vector) => {
+    var max = 0.0;
+    vector.forEach( (value, index) => {
+        max = (value > max) ? value : max;
+    });
+    return max;
 }
