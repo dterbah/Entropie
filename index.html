@@ -28,6 +28,7 @@
         }
     </style>
     <body>
+    <div style="position: fixed; width: 100%;">
         <header class="w3-container header-container">
             <h2>Mathématiques: Entropie</h1>
             <div class="w3-container w3-bar subjects-container">
@@ -38,13 +39,15 @@
         </header>
 
         <div class="w3-sidebar students-container">
-            <div class="w3-row w3-section">
+            <div class="w3-row w3-section" >
                 <div class="w3-rest">
                     <input class="w3-input w3-border" name="student-name" type="text" placeholder="Student name">
                 </div>
             </div>
         </div>
-        
+    </div>
+
+    
         <div class="w3-modal error-modal">
             <div class="w3-modal-content w3-animate-left w3-card-4">
                 <div class="w3-container">
@@ -60,7 +63,7 @@
 
         <br><br>
         
-        <div class="w3-light-grey">
+        <div class="w3-light-grey entropy-container">
             <div class="w3-container w3-green w3-center entropy-bar" style="display: none;"></div>
         </div> 
     </body>
