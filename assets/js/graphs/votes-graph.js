@@ -4,7 +4,9 @@ const EMPTY_GRAPH_DIV = "<div class='" + GRAPH_DIV_CLASS + "'></div>";
 
 displayGraph = (student, subjects) => {
 	const ASIDE_WIDTH = $('.students-container').width();
-	$(GRAPH_CONTAINER_CLASS).empty();
+    $(GRAPH_CONTAINER_CLASS).empty();
+    var entropy = 0.0;
+
 	subjects.forEach( (subject, index) => {
 		const div = $(GRAPH_CONTAINER_CLASS).append(EMPTY_GRAPH_DIV);
 				
@@ -94,12 +96,20 @@ displayGraph = (student, subjects) => {
 					}]
 				}
 			}
-		});	
+        });	
+        
+        entropy += generateEntropy(subject, student);
 
-		console.log(generateEntropy(subject, student));
 	});
 
-	// temporary
-	
-	//console.log(getVoteRow(subject, student));
+    entropy /= subjects.length;
+    const entropyPercentage = (entropy * 100).toFixed(2);
+    const entropyBar = $('.entropy-bar');
+    entropyBar.css({
+        display: 'block',
+        width: entropyPercentage + "%",
+        'margin-left': ASIDE_WIDTH + 'px'
+    }).text('Entropie générale = ' + entropyPercentage + "%");
+
+
 }
