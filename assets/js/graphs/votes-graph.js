@@ -102,22 +102,18 @@ displayGraph = (student, subjects) => {
 				}
 			}
         });	
-        
-        entropy += generateEntropy(subject, student);
+
+        const currentEntropy = generateEntropy(subject, student);
+        const entropyPercentage = (currentEntropy * 100).toFixed(2);
+        $(GRAPH_CONTAINER_CLASS).append('<p class="information">Entropie : ' + entropyPercentage + '%</p>');
+
+        entropy += currentEntropy;
 
 	});
 
     entropy /= subjects.length;
     const entropyPercentage = (entropy * 100).toFixed(2);
-    const entropyBar = $('.entropy-bar');
-    entropyBar.css({
-        display: 'block',
-        width: entropyPercentage + "%",
-		marginLeft: ASIDE_WIDTH + 'px',
-		'position': 'relative',
-		'left':'100px',
-		'bottom':'85px'
-    }).text('Entropie générale = ' + entropyPercentage + "%");
 
+    $(GRAPH_CONTAINER_CLASS).append('<p class="information">Entropie général : ' + entropyPercentage + '%</p>');
 
 }
