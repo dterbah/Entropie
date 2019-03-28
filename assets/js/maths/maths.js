@@ -8,7 +8,7 @@ generateEntropy = (subject, student) => {
             globalRow[index] += vote;
         });
     });
-    
+
     normalizeVector(globalRow);
 
     const voteRow = getVoteRow(subject, student);
