@@ -3,9 +3,13 @@ const GRAPH_CONTAINER_CLASS = ".graph-container";
 const EMPTY_GRAPH_DIV = "<div class='" + GRAPH_DIV_CLASS + "'></div>";
 
 displayGraph = (student, subjects) => {
+    // remove all graphs
+    $(GRAPH_CONTAINER_CLASS).empty();
+
     const ASIDE_WIDTH = $('.students-container').width();
     const HEIGHT_HEADER = $('header').height();
-    $(GRAPH_CONTAINER_CLASS).empty();
+
+    $(GRAPH_CONTAINER_CLASS).css('padding-top', HEIGHT_HEADER + 'px');
     var entropy = 0.0;
 
 	subjects.forEach( (subject, index) => {
@@ -112,5 +116,5 @@ displayGraph = (student, subjects) => {
         'margin-left': ASIDE_WIDTH + 'px'
     }).text('Entropie générale = ' + entropyPercentage + "%");
 
-    $(GRAPH_CONTAINER_CLASS).css('padding-top', HEIGHT_HEADER + 'px');
+
 }
