@@ -75,9 +75,10 @@ klDivergence = (p1, p2) => {
     var klDiv = 0.0;
     for(let i = 0; i < p1.length; i++) {
         if(p1[i] == 0.0 || p2[i] == 0.0) continue;
-
         klDiv += p1[i] * Math.log(p1[i] / p2[i]);
     }
+
+    klDiv = Math.exp(-klDiv);
 
     return klDiv;
 }
