@@ -66,7 +66,7 @@ displayGraph = (student, subjects) => {
 
 		// individual graph
 		const studentRow = getVoteRow(subject, student);
-		
+
 		const individualChartContext = document.getElementById('individual-chart' + index).getContext('2d');
 
 		const individualChart = new Chart(individualChartContext, {
