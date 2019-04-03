@@ -1,7 +1,7 @@
 generateEntropy = (subject, student) => {
     const matrix = getVotesMatrix(subject);
 
-    const globalRow = new Array(matrix[0].length);
+    globalRow = new Array(matrix[0].length);
     globalRow.fill(0);
     matrix.forEach( (student, index) => {
         student.forEach( (vote, index) => {
@@ -10,10 +10,14 @@ generateEntropy = (subject, student) => {
     });
 
     normalizeVector(globalRow);
+    smoothVector(globalRow);
 
-    const voteRow = getVoteRow(subject, student);
+    voteRow = getVoteRow(subject, student);
 
     normalizeVector(voteRow);
+    smoothVector(voteRow);
+
+    console.log(voteRow);
 
     const maxValue = maxVectorValue(voteRow);
     if(maxValue == 0.0) {
@@ -21,6 +25,27 @@ generateEntropy = (subject, student) => {
     } else {
         return klDivergence(voteRow, globalRow);
     }
+}
+
+smoothVector = (vector) => {
+    var avg = avgVector(vector);
+    vector.forEach((value, index) => {
+        var delta = (Math.abs(avg - value) * 0.0000001);
+        if(avg - value > 0.0) {
+            vector[index] = value + delta;
+        } else {
+            vector[index] = value - delta;
+        }
+    });
+}
+
+avgVector = (vector) => {
+    var avg = 0.0;
+    vector.forEach((value, index) => {
+        avg += value;
+    });
+    avg /= vector.length;
+    return avg;
 }
 
 getVotesMatrix = (subject) => {
@@ -64,11 +89,10 @@ getVoteRow = (subject, student) => {
 klDivergence = (p1, p2) => {
     var klDiv = 0.0;
     for(let i = 0; i < p1.length; i++) {
-        if(p1[i] == 0.0 || p2[i] == 0.0) continue;
         klDiv += p1[i] * Math.log(p1[i] / p2[i]);
     }
 
-    klDiv = Math.exp(-klDiv);
+    klDiv = Math.exp(-klDiv * 0.5);
 
     return klDiv;
 }
